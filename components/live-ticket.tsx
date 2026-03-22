@@ -48,7 +48,7 @@ export default function LiveTicket() {
 
             {/* Ticket Card */}
             <motion.div
-              className="relative bg-gradient-to-br from-slate-900 to-slate-950 rounded-2xl border border-purple-500/30 p-8 backdrop-blur-xl"
+              className="relative bg-gradient-to-br from-slate-900 to-slate-950 rounded-2xl border border-purple-500/30 p-6 sm:p-8 backdrop-blur-xl"
               whileHover={{ borderColor: 'rgba(139, 92, 246, 0.8)' }}
               transition={{ duration: 0.3 }}
             >
@@ -58,18 +58,18 @@ export default function LiveTicket() {
                 animate={{ boxShadow: ['0 0 20px rgba(239, 68, 68, 0.5)', '0 0 40px rgba(239, 68, 68, 0.8)', '0 0 20px rgba(239, 68, 68, 0.5)'] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
-                <span className="text-xs font-bold text-red-400">LIVE</span>
+                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-red-500 animate-pulse"></div>
+                <span className="text-[10px] sm:text-xs font-bold text-red-400">LIVE</span>
               </motion.div>
 
               {/* Event Info */}
               <div className="mb-8">
-                <div className="inline-block px-3 py-1 rounded-lg bg-purple-500/20 border border-purple-500/30 text-xs text-purple-300 font-semibold mb-4">
+                <div className="inline-block px-3 py-1 rounded-lg bg-purple-500/20 border border-purple-500/30 text-[10px] sm:text-xs text-purple-300 font-semibold mb-4">
                   EVENT TICKET
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-3">Summer Music Festival</h3>
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">Summer Music Festival</h3>
                 
-                <div className="space-y-2 text-sm text-gray-400">
+                <div className="space-y-2 text-xs sm:text-sm text-gray-400">
                   <div className="flex items-center gap-2">
                     <MapPin className="w-4 h-4 text-purple-400" />
                     <span>Lusaka International Arena</span>
@@ -89,14 +89,14 @@ export default function LiveTicket() {
               <div className="flex flex-col items-center gap-4 py-8 border-y border-purple-500/20">
                 {/* Rotating QR Code */}
                 <motion.div
-                  className="p-4 rounded-xl bg-white/10 border-2 border-purple-500/50"
+                  className="p-3 sm:p-4 rounded-xl bg-white/10 border-2 border-purple-500/50"
                   style={{ rotate: qrRotation }}
                 >
-                  <div className="w-32 h-32 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center">
-                    <QrCode className="w-24 h-24 text-white/80" />
+                  <div className="w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center">
+                    <QrCode className="w-16 h-16 sm:w-24 sm:h-24 text-white/80" />
                   </div>
                 </motion.div>
-                <p className="text-xs text-gray-400 text-center">
+                <p className="text-[10px] sm:text-xs text-gray-400 text-center">
                   Security token refreshes every <span className="text-purple-400 font-semibold">3 seconds</span>
                 </p>
               </div>
@@ -104,22 +104,22 @@ export default function LiveTicket() {
               {/* Ticket Details */}
               <div className="mt-8 grid grid-cols-2 gap-4">
                 <div className="p-3 rounded-lg bg-purple-500/10 border border-purple-500/20">
-                  <p className="text-xs text-gray-400 mb-1">Ticket Type</p>
-                  <p className="text-sm font-bold text-white">VIP Access</p>
+                  <p className="text-[10px] text-gray-400 mb-1">Ticket Type</p>
+                  <p className="text-xs sm:text-sm font-bold text-white">VIP Access</p>
                 </div>
                 <div className="p-3 rounded-lg bg-purple-500/10 border border-purple-500/20">
-                  <p className="text-xs text-gray-400 mb-1">Seat ID</p>
-                  <p className="text-sm font-bold text-white">A1-2847</p>
+                  <p className="text-[10px] text-gray-400 mb-1">Seat ID</p>
+                  <p className="text-xs sm:text-sm font-bold text-white">A1-2847</p>
                 </div>
               </div>
 
               {/* Verification checkmark */}
               <motion.div
-                className="absolute -bottom-6 -right-6 w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center border-4 border-black shadow-xl"
+                className="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center border-4 border-black shadow-xl"
                 animate={{ scale: [1, 1.1, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                <span className="text-2xl">✓</span>
+                <span className="text-xl sm:text-2xl">✓</span>
               </motion.div>
             </motion.div>
           </motion.div>

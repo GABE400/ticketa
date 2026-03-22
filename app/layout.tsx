@@ -8,11 +8,13 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://ticketa.app'
 
-export const viewport: Viewport = {
-  themeColor: '#000000',
-  width: 'device-width',
-  initialScale: 1,
-  maximumScale: 1,
+export function generateViewport(): Viewport {
+  return {
+    themeColor: '#000000',
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+  }
 }
 
 export const metadata: Metadata = {

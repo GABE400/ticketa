@@ -97,7 +97,7 @@ export default function FeatureGrid() {
 
         {/* Feature Grid - Bento Style */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 md:auto-rows-[300px]"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -109,7 +109,7 @@ export default function FeatureGrid() {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className={`${feature.gridSpan} group relative overflow-hidden rounded-2xl border border-purple-500/20 bg-gradient-to-br from-slate-900/50 to-slate-950/50 p-8 backdrop-blur-xl hover:border-purple-500/50 transition-all duration-300 cursor-pointer`}
+                className={`${feature.gridSpan} md:col-auto md:row-auto ${feature.gridSpan.includes('col-span-1') ? 'md:col-span-1' : ''} ${feature.gridSpan.includes('col-span-2') ? 'md:col-span-2' : ''} ${feature.gridSpan.includes('row-span-1') ? 'md:row-span-1' : ''} ${feature.gridSpan.includes('row-span-2') ? 'md:row-span-2' : ''} group relative overflow-hidden rounded-2xl border border-purple-500/20 bg-gradient-to-br from-slate-900/50 to-slate-950/50 p-6 sm:p-8 backdrop-blur-xl hover:border-purple-500/50 transition-all duration-300 cursor-pointer min-h-[250px] md:min-h-0`}
               >
                 {/* Background image if available */}
                 {feature.image && (

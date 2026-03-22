@@ -26,17 +26,17 @@ export default function HeroSection() {
 
   return (
     <section 
-      className="relative min-h-screen pt-20 pb-20 overflow-hidden flex items-center justify-center bg-cover bg-center bg-no-repeat"
+      className="relative min-h-screen pt-32 pb-20 overflow-hidden flex items-center justify-center bg-cover bg-center bg-no-repeat"
       style={{
         backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.9) 100%), url(/images/event-crowd.jpg)',
-        backgroundAttachment: 'fixed',
+        backgroundAttachment: 'scroll', // Changed from fixed for better mobile performance
       }}
     >
 
       {/* Background gradient accent elements */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
-        <div className="absolute top-40 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-40 right-1/4 w-96 h-96 bg-red-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-20 sm:top-40 left-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 sm:bottom-40 right-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-red-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
       </div>
 
       <motion.div
@@ -48,18 +48,18 @@ export default function HeroSection() {
         {/* Badge */}
         <motion.div variants={itemVariants} className="mb-6">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/30 backdrop-blur-sm">
-            <Sparkles className="w-4 h-4 text-purple-400" />
-            <span className="text-sm text-purple-300">Next-generation ticketing</span>
+            <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-purple-400" />
+            <span className="text-xs sm:text-sm text-purple-300">Next-generation ticketing</span>
           </div>
         </motion.div>
 
         {/* Headline */}
         <motion.h1 
           variants={itemVariants}
-          className="text-5xl md:text-7xl font-black mb-6 leading-tight tracking-tight"
+          className="text-4xl sm:text-6xl md:text-7xl font-black mb-6 leading-[1.1] tracking-tight"
         >
           <span className="text-white">Ticketing</span>
-          <br />
+          <br className="hidden sm:block" />
           <span className="bg-gradient-to-r from-purple-400 via-purple-500 to-red-500 bg-clip-text text-transparent">
             Without the Drama
           </span>
@@ -68,7 +68,7 @@ export default function HeroSection() {
         {/* Subheading */}
         <motion.p 
           variants={itemVariants}
-          className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed"
+          className="text-base sm:text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed"
         >
           Experience Ticketa: The only platform with rotating QR security, instant Mobile Money payouts, and zero-scalping technology.
         </motion.p>

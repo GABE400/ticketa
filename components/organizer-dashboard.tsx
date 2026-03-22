@@ -79,15 +79,15 @@ export default function OrganizerDashboard() {
           <div className="absolute -inset-20 bg-gradient-to-r from-red-500/10 via-purple-500/10 to-red-500/10 blur-3xl -z-10 rounded-3xl"></div>
 
           {/* Main Dashboard */}
-          <div className="rounded-3xl border border-red-500/30 bg-gradient-to-br from-slate-900/80 to-slate-950/80 backdrop-blur-xl p-8">
+          <div className="rounded-2xl sm:rounded-3xl border border-red-500/30 bg-gradient-to-br from-slate-900/80 to-slate-950/80 backdrop-blur-xl p-4 sm:p-8">
             {/* Stats Row */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-8">
               {stats.map((stat, index) => {
                 const Icon = stat.icon;
                 return (
                   <motion.div
                     key={index}
-                    className="p-6 rounded-xl border border-red-500/20 bg-red-500/5 hover:border-red-500/40 transition-colors"
+                    className="p-4 sm:p-6 rounded-xl border border-red-500/20 bg-red-500/5 hover:border-red-500/40 transition-colors"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -95,14 +95,14 @@ export default function OrganizerDashboard() {
                   >
                     <div className="flex items-start justify-between mb-4">
                       <div>
-                        <p className="text-gray-400 text-sm mb-2">{stat.label}</p>
-                        <p className="text-3xl font-bold text-white">{stat.value}</p>
+                        <p className="text-gray-400 text-xs sm:text-sm mb-2">{stat.label}</p>
+                        <p className="text-2xl sm:text-3xl font-bold text-white">{stat.value}</p>
                       </div>
-                      <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center">
-                        <Icon className="w-6 h-6 text-white" />
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center shrink-0">
+                        <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                       </div>
                     </div>
-                    <p className="text-sm text-green-400 font-semibold">{stat.change} from last event</p>
+                    <p className="text-xs sm:text-sm text-green-400 font-semibold">{stat.change} from last event</p>
                   </motion.div>
                 );
               })}
