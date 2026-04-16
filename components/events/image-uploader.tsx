@@ -50,8 +50,19 @@ export default function ImageUploader({ onUploadSuccess, currentImage }: ImageUp
         setUploadProgress(Math.round(progress.loaded / progress.total * 100));
     };
 
+    if (!publicKey || !urlEndpoint) {
+        return (
+            <div className="h-48 rounded-3xl border-2 border-dashed border-red-500/20 bg-red-500/5 flex flex-col items-center justify-center p-6 text-center">
+                <p className="text-sm font-bold text-red-400">ImageKit Configuration Missing</p>
+                <p className="text-[10px] text-gray-400 uppercase font-black tracking-widest mt-2">
+                    Please add ImageKit keys to your environment variables.
+                </p>
+            </div>
+        );
+    }
+
     return (
-        <ImageKitProvider publicKey={publicKey!} urlEndpoint={urlEndpoint!} authenticator={authenticator}>
+        <ImageKitProvider publicKey={publicKey} urlEndpoint={urlEndpoint} authenticator={authenticator}>
             <div className="space-y-4">
                 <AnimatePresence mode="wait">
                     {previewUrl ? (
