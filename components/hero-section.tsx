@@ -2,8 +2,10 @@
 
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
+import { useAuthModal } from './auth/auth-modal-provider';
 
 export default function HeroSection() {
+  const { openSignup } = useAuthModal();
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {

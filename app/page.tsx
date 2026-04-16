@@ -1,31 +1,21 @@
-'use client';
-
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Shield, Zap, Heart, TrendingUp, ChevronRight, QrCode } from 'lucide-react';
 import Navbar from '@/components/navbar';
 import HeroSection from '@/components/hero-section';
 import LiveTicket from '@/components/live-ticket';
 import FeatureGrid from '@/components/feature-grid';
-import OrganizerDashboard from '@/components/organizer-dashboard';
+import EventList from '@/components/events/event-list';
 import Footer from '@/components/footer';
 
-export default function Home() {
-  const [scrollY, setScrollY] = useState(0);
+export const revalidate = 3600; // revalidate every hour
 
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
+export default async function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-black via-slate-950 to-black text-white">
+    <main className="min-h-screen bg-black text-white">
       <Navbar />
       <HeroSection />
+      {/* @ts-expect-error Async Server Component */}
+      <EventList />
       <LiveTicket />
       <FeatureGrid />
-      <OrganizerDashboard />
       <Footer />
     </main>
   );

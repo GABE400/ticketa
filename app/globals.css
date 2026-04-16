@@ -181,3 +181,15 @@
 .animate-slide-up {
   animation: slide-up 0.8s ease-out;
 }
+@keyframes scan-line {
+  0% {
+    top: 20%;
+  }
+  100% {
+    top: 80%;
+  }
+}
+
+.animate-scan-line {
+  animation: scan-line 2s ease-in-out infinite alternate;
+}

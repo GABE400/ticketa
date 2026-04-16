@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
+import { AuthModalProvider } from '@/components/auth/auth-modal-provider'
+import { Toaster } from '@/components/ui/sonner'
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
@@ -82,7 +84,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className="font-sans antialiased">
         <script
           type="application/ld+json"
@@ -102,7 +104,10 @@ export default function RootLayout({
             })
           }}
         />
-        {children}
+        <AuthModalProvider>
+          {children}
+        </AuthModalProvider>
+        <Toaster theme="dark" position="top-center" richColors />
         <Analytics />
       </body>
     </html>
