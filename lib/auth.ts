@@ -35,14 +35,16 @@ export const auth = betterAuth({
     },
     socialProviders: {
         google: {
-            clientId: process.env.GOOGLE_CLIENT_ID!,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+            clientId: process.env.GOOGLE_CLIENT_ID || "build_placeholder",
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET || "build_placeholder",
         },
         github: {
-            clientId: process.env.GITHUB_CLIENT_ID!,
-            clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+            clientId: process.env.GITHUB_CLIENT_ID || "build_placeholder",
+            clientSecret: process.env.GITHUB_CLIENT_SECRET || "build_placeholder",
         },
     },
+    secret: process.env.BETTER_AUTH_SECRET || "build_placeholder_secret_min_32_characters_long",
+    baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
     plugins: [
         magicLink({
             sendMagicLink: async ({ email, url }, ctx) => {

@@ -5,7 +5,7 @@ import FeatureGrid from '@/components/feature-grid';
 import EventList from '@/components/events/event-list';
 import Footer from '@/components/footer';
 
-export const revalidate = 3600; // revalidate every hour
+export const dynamic = 'force-dynamic';
 
 export default async function Home() {
   return (
