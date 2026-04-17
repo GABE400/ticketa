@@ -8,12 +8,9 @@ const databaseUrl = process.env.DATABASE_URL;
  * Robust database initialization for standard Node.js environments (Koyeb/Docker).
  * Uses postgres.js for stable TCP connection pooling with Neon.
  */
-if (!databaseUrl && process.env.NODE_ENV === 'production') {
-  throw new Error('DATABASE_URL is missing in production environment');
-}
-
-// For build-time stability, we only initialize the client if the URL is present
-// or if we are in development.
+// During the Next.js build phase on Koyeb, DATABASE_URL is often missing.
+// We allow the module to initialize with a placeholder to prevent build-time crashes.
+// Connection errors will only occur if a query is actually attempted at runtime without a valid URL.
 const client = postgres(databaseUrl || 'postgres://localhost:5432/build_placeholder', {
   ssl: 'require',
   max: 10, // Adjust pooling based on resource limits
