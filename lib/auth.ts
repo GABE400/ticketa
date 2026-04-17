@@ -44,7 +44,7 @@ export const auth = betterAuth({
         },
     },
     secret: process.env.BETTER_AUTH_SECRET || "build_placeholder_secret_min_32_characters_long",
-    baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
+    baseURL: process.env.BETTER_AUTH_URL || (process.env.NODE_ENV === 'production' ? `https://${process.env.KOYEB_PUBLIC_DOMAIN}` : "http://localhost:3000"),
     plugins: [
         magicLink({
             sendMagicLink: async ({ email, url }, ctx) => {
