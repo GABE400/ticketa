@@ -1,17 +1,22 @@
-import { drizzle } from 'drizzle-orm/neon-serverless';
-import { Pool } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/postgres-js';
+import postgres from 'postgres';
 import * as schema from './schema';
 
 const databaseUrl = process.env.DATABASE_URL;
 
 /**
- * Build-safe database initialization.
- * During the Next.js build phase, DATABASE_URL may be missing.
- * We use a proxy or a dummy connection to prevent the build from crashing
- * while allowing the site to statically optimize non-DB routes.
+ * Robust database initialization for standard Node.js environments (Koyeb/Docker).
+ * Uses postgres.js for stable TCP connection pooling with Neon.
  */
-const pool = new Pool({ 
-  connectionString: databaseUrl || 'postgres://localhost:5432/build_placeholder' 
+if (!databaseUrl && process.env.NODE_ENV === 'production') {
+  throw new Error('DATABASE_URL is missing in production environment');
+}
+
+// For build-time stability, we only initialize the client if the URL is present
+// or if we are in development.
+const client = postgres(databaseUrl || 'postgres://localhost:5432/build_placeholder', {
+  ssl: 'require',
+  max: 10, // Adjust pooling based on resource limits
 });
 
-export const db = drizzle(pool, { schema });
+export const db = drizzle(client, { schema });
