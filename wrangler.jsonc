@@ -2,7 +2,7 @@
   "$schema": "node_modules/wrangler/config-schema.json",
    "main": ".open-next/worker.js",
   "name": "ticketa",
-  // "pages_build_output_dir": ".open-next",
+  "pages_build_output_dir": ".open-next",
   "compatibility_date": "2026-04-16",
   "compatibility_flags": [
     "nodejs_compat"
