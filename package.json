@@ -5,8 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "opennextjs-cloudflare build",
-    "build:next": "next build",
+    "build": "next build && opennextjs-cloudflare build --skipBuild",
     "deploy": "opennextjs-cloudflare deploy",
     "start": "next start",
     "lint": "eslint ."
