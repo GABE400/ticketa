@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && opennextjs-cloudflare build --skipBuild --skipWranglerConfigCheck",
-    "deploy": "true",
+    "deploy": "opennextjs-cloudflare deploy",
     "start": "next start",
     "lint": "eslint ."
   },
