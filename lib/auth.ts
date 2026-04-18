@@ -47,11 +47,14 @@ export const auth = betterAuth({
     baseURL: (process.env.BETTER_AUTH_URL || 
              (process.env.KOYEB_PUBLIC_DOMAIN ? `https://${process.env.KOYEB_PUBLIC_DOMAIN}` : 
              "https://technical-bridgette-techdo-b2cd0133.koyeb.app")).replace(/\/$/, ""),
+    advanced: {
+        cookiePrefix: "ticketa",
+    },
     trustedOrigins: [
         process.env.BETTER_AUTH_URL,
         "https://technical-bridgette-techdo-b2cd0133.koyeb.app",
+        "https://technical-bridgette-techdo-b2cd0133.koyeb.app/",
         process.env.KOYEB_PUBLIC_DOMAIN ? `https://${process.env.KOYEB_PUBLIC_DOMAIN}` : undefined,
-        "http://localhost:3000"
     ].map(o => o?.replace(/\/$/, "")).filter((origin): origin is string => !!origin),
     plugins: [
         magicLink({
