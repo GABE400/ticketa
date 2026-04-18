@@ -5,6 +5,16 @@ import { db } from "./db";
 import * as schema from "./db/schema";
 import nodemailer from "nodemailer";
 
+/** Ensure a URL always has the https:// protocol */
+function ensureProtocol(url: string | undefined): string | undefined {
+    if (!url) return undefined;
+    url = url.replace(/\/$/, ""); // strip trailing slash
+    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+        return `https://${url}`;
+    }
+    return url;
+}
+
 const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: parseInt(process.env.SMTP_PORT || "587"),
@@ -43,14 +53,14 @@ export const auth = betterAuth({
         trustRemoteAddress: true,
     },
     secret: process.env.BETTER_AUTH_SECRET,
-    baseURL: (process.env.BETTER_AUTH_URL || 
-             process.env.NEXT_PUBLIC_SITE_URL || 
-             "https://technical-bridgette-techdo-b2cd0133.koyeb.app").replace(/\/$/, ""),
+    baseURL: ensureProtocol(process.env.BETTER_AUTH_URL) || 
+             ensureProtocol(process.env.NEXT_PUBLIC_SITE_URL) || 
+             "https://technical-bridgette-techdo-b2cd0133.koyeb.app",
     trustedOrigins: [
         "https://technical-bridgette-techdo-b2cd0133.koyeb.app",
-        process.env.BETTER_AUTH_URL,
-        process.env.NEXT_PUBLIC_SITE_URL
-    ].map(o => o?.replace(/\/$/, "")).filter((origin): origin is string => !!origin),
+        ensureProtocol(process.env.BETTER_AUTH_URL),
+        ensureProtocol(process.env.NEXT_PUBLIC_SITE_URL),
+    ].filter((origin): origin is string => !!origin),
     plugins: [
         magicLink({
             sendMagicLink: async ({ email, url }, ctx) => {
