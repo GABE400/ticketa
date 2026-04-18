@@ -12,9 +12,8 @@ import { revalidatePath } from "next/cache";
  */
 export async function getSiteSettings() {
     try {
-        // During build time, DATABASE_URL might be missing. 
-        // We avoid calling the DB if we're obviously in a build environment without a connection.
-        if (process.env.NEXT_PHASE === 'phase-production-build' && !process.env.DATABASE_URL) {
+        // Build-phase safety: return defaults immediately during build
+        if (process.env.NEXT_PHASE === 'phase-production-build') {
             return { id: "global", demoVideoUrl: null, updatedAt: new Date() };
         }
 

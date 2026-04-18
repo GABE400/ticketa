@@ -161,6 +161,10 @@ export async function deleteEvent(eventId: string) {
 }
 
 export async function getEvents() {
+  if (process.env.NEXT_PHASE === 'phase-production-build') {
+    return [];
+  }
+  
   return await db.query.events.findMany({
     with: {
       organizer: true,
