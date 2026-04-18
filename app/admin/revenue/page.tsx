@@ -65,8 +65,8 @@ export default async function AdminRevenuePage() {
                             {new Intl.NumberFormat('en-ZM', { style: 'currency', currency: 'ZMW' }).format(stats.platformProfit)}
                         </div>
                         <div className="flex gap-4 mt-2">
-                            <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Fees: ${stats.totalFeesCollected.toFixed(2)}</span>
-                            <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Comm: ${stats.totalCommissions.toFixed(2)}</span>
+                            <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Fees: K{stats.totalFeesCollected.toFixed(2)}</span>
+                            <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Comm: K{stats.totalCommissions.toFixed(2)}</span>
                         </div>
                     </CardContent>
                 </Card>
@@ -117,19 +117,19 @@ export default async function AdminRevenuePage() {
                                         </div>
                                     </td>
                                     <td className="px-6 py-4 text-right text-xs font-mono text-gray-400">
-                                        ${Number(order.subtotal).toFixed(2)}
+                                        K{Number(order.subtotal).toFixed(2)}
                                     </td>
                                     <td className="px-6 py-4 text-right text-xs font-mono text-purple-400/80">
-                                        +${Number(order.serviceFee).toFixed(2)}
+                                        +K{Number(order.serviceFee).toFixed(2)}
                                     </td>
                                     <td className="px-6 py-4 text-right text-xs font-mono text-purple-400/80">
-                                        -${Number(order.commissionAmount).toFixed(2)}
+                                        -K{Number(order.commissionAmount).toFixed(2)}
                                     </td>
                                     <td className="px-6 py-4 text-right text-sm font-black text-white">
-                                        ${Number(order.amount).toFixed(2)}
+                                        K{Number(order.amount).toFixed(2)}
                                     </td>
                                     <td className="px-6 py-4 text-right text-sm font-black text-red-400">
-                                        ${Number(order.netAmount).toFixed(2)}
+                                        K{Number(order.netAmount).toFixed(2)}
                                     </td>
                                 </tr>
                             ))}

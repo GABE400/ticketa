@@ -49,6 +49,12 @@ export async function initiateCheckout(data: z.infer<typeof checkoutSchema>) {
   });
 
   // 3. Initiate PesaPal
+  const ipnId = process.env.PESAPAL_IPN_ID;
+  if (!ipnId) {
+    console.error("[PesaPal] Configuration error: PESAPAL_IPN_ID is not set.");
+    throw new Error("Payment gateway configuration error. Please contact support.");
+  }
+
   const pToken = await getPesapalToken();
   const pesapalResponse = await registerPesapalOrder(pToken, {
     id: orderId,
@@ -56,7 +62,7 @@ export async function initiateCheckout(data: z.infer<typeof checkoutSchema>) {
     currency: "ZMW",
     description: `Ticket Purchase: ${ticketType.event.title} (${quantity} tickets)`,
     callback_url: `${process.env.NEXT_PUBLIC_SITE_URL}/api/payments/pesapal/callback`,
-    notification_id: process.env.PESAPAL_IPN_ID!,
+    notification_id: ipnId,
     billing_address: {
       email_address: session.user.email,
       first_name: session.user.name.split(" ")[0],

@@ -127,7 +127,7 @@ export default async function AdminDashboardPage() {
                                         {order.ticketType?.event?.title || "Unknown Event"}
                                     </td>
                                     <td className="px-6 py-4 text-sm font-black text-white">
-                                        ${Number(order.amount).toLocaleString()}
+                                        K{Number(order.amount).toLocaleString()}
                                     </td>
                                     <td className="px-6 py-4 text-xs text-gray-400">
                                         {format(new Date(order.createdAt), "MMM d, HH:mm")}

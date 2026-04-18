@@ -74,7 +74,7 @@ export default function TicketPurchaseForm({ ticketTypes }: TicketPurchaseFormPr
                   <p className="text-xs text-gray-500">Available until sold out</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-lg font-black text-white">ZMW {parseFloat(type.price).toLocaleString()}</p>
+                  <p className="text-lg font-black text-white">K {parseFloat(type.price).toLocaleString()}</p>
                 </div>
               </div>
               <div className="flex items-center gap-2 mt-4">
@@ -108,15 +108,15 @@ export default function TicketPurchaseForm({ ticketTypes }: TicketPurchaseFormPr
           <div className="space-y-2 pt-2 border-t border-white/5">
             <div className="flex justify-between text-xs">
               <span className="text-gray-500">Subtotal</span>
-              <span className="text-gray-300">ZMW {subtotal.toLocaleString()}</span>
+              <span className="text-gray-300">K {subtotal.toLocaleString()}</span>
             </div>
             <div className="flex justify-between text-xs">
               <span className="text-gray-500">Service Fee (Platform + Processing)</span>
-              <span className="text-gray-300">ZMW {serviceFee.toLocaleString()}</span>
+              <span className="text-gray-300">K {serviceFee.toLocaleString()}</span>
             </div>
             <div className="flex justify-between items-end mt-2">
               <span className="text-gray-400 tracking-wide uppercase text-xs font-bold">Total Amount</span>
-              <span className="text-white text-xl font-black">ZMW {totalAmount.toLocaleString()}</span>
+              <span className="text-white text-xl font-black">K {totalAmount.toLocaleString()}</span>
             </div>
           </div>
           <Button 

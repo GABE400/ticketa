@@ -3,20 +3,33 @@ const PESAPAL_URL = process.env.PESAPAL_SANDBOX === 'true'
   : 'https://pay.pesapal.com/v3';
 
 export async function getPesapalToken() {
-  const response = await fetch(`${PESAPAL_URL}/api/Auth/RequestToken`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    },
-    body: JSON.stringify({
-      consumer_key: process.env.PESAPAL_CONSUMER_KEY,
-      consumer_secret: process.env.PESAPAL_CONSUMER_SECRET,
-    }),
-  });
+  console.log(`[PesaPal] Requesting token from: ${PESAPAL_URL}`);
+  
+  try {
+    const response = await fetch(`${PESAPAL_URL}/api/Auth/RequestToken`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({
+        consumer_key: process.env.PESAPAL_CONSUMER_KEY,
+        consumer_secret: process.env.PESAPAL_CONSUMER_SECRET,
+      }),
+    });
 
-  const data = await response.json();
-  return data.token;
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        console.error("[PesaPal] Auth failed:", response.status, errorData);
+        throw new Error(`PesaPal Authentication failed: ${errorData.error?.message || response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data.token;
+  } catch (error) {
+    console.error("[PesaPal] Connection error during auth:", error);
+    throw error;
+  }
 }
 
 export async function registerPesapalOrder(token: string, orderData: {

@@ -56,7 +56,7 @@ export default function EventCard({ id, title, location, startTime, imageUrl, ca
       <CardFooter className="p-5 pt-0 flex items-center justify-between">
         <div className="flex flex-col">
           <span className="text-[10px] text-gray-500 uppercase font-bold tracking-tight">Tickets from</span>
-          <span className="text-lg font-black text-white">${parseFloat(minPrice).toLocaleString()}</span>
+          <span className="text-lg font-black text-white">K{parseFloat(minPrice).toLocaleString()}</span>
         </div>
         <Link href={`/events/${id}`}>
           <Button size="sm" className="bg-gradient-to-r from-purple-600 to-red-600 hover:from-purple-500 hover:to-red-500 font-bold px-6 border-0 shadow-lg shadow-purple-500/20">
