@@ -44,6 +44,14 @@ export const auth = betterAuth({
         },
     },
     secret: process.env.BETTER_AUTH_SECRET || "build_placeholder_secret_min_32_characters_long",
+    logger: {
+        disabled: false,
+        onLog(message, level, data) {
+            if (level === "error") {
+                console.error(`[Auth Error] ${message}`, data);
+            }
+        },
+    },
     baseURL: (process.env.BETTER_AUTH_URL || 
              (process.env.KOYEB_PUBLIC_DOMAIN ? `https://${process.env.KOYEB_PUBLIC_DOMAIN}` : 
              "https://technical-bridgette-techdo-b2cd0133.koyeb.app")).replace(/\/$/, ""),
