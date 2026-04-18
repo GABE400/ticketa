@@ -14,6 +14,15 @@ interface EventPageProps {
 
 export default async function EventPage({ params }: EventPageProps) {
   const { id } = await params;
+
+  // Build phase guard: skip DB query during build to prevent crash
+  if (process.env.NEXT_PHASE === 'phase-production-build') {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center font-black italic uppercase tracking-widest animate-pulse">
+        Building Event View...
+      </div>
+    );
+  }
   
   const event = await db.query.events.findFirst({
     where: (events, { eq }) => eq(events.id, id),
