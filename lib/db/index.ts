@@ -14,10 +14,14 @@ if (isBuildPhase) {
  * Uses postgres.js for stable TCP connection pooling with Neon.
  */
 const client = postgres(databaseUrl || 'postgres://localhost:5432/build_placeholder', {
-  ssl: isBuildPhase ? false : 'require', // Disable SSL check during build if using placeholder
-  max: isBuildPhase ? 1 : 10, // Minimize connection pool during build
-  idle_timeout: 1,
-  connect_timeout: 1,
+  ssl: isBuildPhase ? false : 'require', 
+  max: isBuildPhase ? 1 : 10,
 });
+
+// Runtime connectivity check for production logging
+if (!isBuildPhase) {
+    client`SELECT 1`.then(() => console.log("✅ Database connection verified (Runtime)"))
+                 .catch((e) => console.error("❌ Database connection failed (Runtime):", e.message));
+}
 
 export const db = drizzle(client, { schema });

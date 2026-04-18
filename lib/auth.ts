@@ -38,32 +38,12 @@ export const auth = betterAuth({
             clientId: process.env.GOOGLE_CLIENT_ID || "build_placeholder",
             clientSecret: process.env.GOOGLE_CLIENT_SECRET || "build_placeholder",
         },
-        github: {
-            clientId: process.env.GITHUB_CLIENT_ID || "build_placeholder",
-            clientSecret: process.env.GITHUB_CLIENT_SECRET || "build_placeholder",
-        },
     },
-    secret: process.env.BETTER_AUTH_SECRET || "build_placeholder_secret_min_32_characters_long",
-    logger: {
-        disabled: false,
-        onLog(message, level, data) {
-            if (level === "error") {
-                console.error(`[Auth Error] ${message}`, data);
-            }
-        },
-    },
-    baseURL: (process.env.BETTER_AUTH_URL || 
-             (process.env.KOYEB_PUBLIC_DOMAIN ? `https://${process.env.KOYEB_PUBLIC_DOMAIN}` : 
-             "https://technical-bridgette-techdo-b2cd0133.koyeb.app")).replace(/\/$/, ""),
-    advanced: {
-        cookiePrefix: "ticketa",
-    },
+    secret: process.env.BETTER_AUTH_SECRET,
+    baseURL: (process.env.BETTER_AUTH_URL || "https://technical-bridgette-techdo-b2cd0133.koyeb.app").replace(/\/$/, ""),
     trustedOrigins: [
-        process.env.BETTER_AUTH_URL,
         "https://technical-bridgette-techdo-b2cd0133.koyeb.app",
-        "https://technical-bridgette-techdo-b2cd0133.koyeb.app/",
-        process.env.KOYEB_PUBLIC_DOMAIN ? `https://${process.env.KOYEB_PUBLIC_DOMAIN}` : undefined,
-    ].map(o => o?.replace(/\/$/, "")).filter((origin): origin is string => !!origin),
+    ],
     plugins: [
         magicLink({
             sendMagicLink: async ({ email, url }, ctx) => {
