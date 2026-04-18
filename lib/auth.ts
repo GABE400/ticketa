@@ -44,7 +44,13 @@ export const auth = betterAuth({
         },
     },
     secret: process.env.BETTER_AUTH_SECRET || "build_placeholder_secret_min_32_characters_long",
-    baseURL: process.env.BETTER_AUTH_URL || (process.env.NODE_ENV === 'production' ? (process.env.KOYEB_PUBLIC_DOMAIN ? `https://${process.env.KOYEB_PUBLIC_DOMAIN}` : undefined) : "http://localhost:3000"),
+    baseURL: process.env.BETTER_AUTH_URL || 
+             (process.env.KOYEB_PUBLIC_DOMAIN ? `https://${process.env.KOYEB_PUBLIC_DOMAIN}` : 
+             (process.env.NODE_ENV === 'production' ? `https://ticketa.app` : "http://localhost:3000")),
+    trustedOrigins: [
+        process.env.BETTER_AUTH_URL || "",
+        process.env.KOYEB_PUBLIC_DOMAIN ? `https://${process.env.KOYEB_PUBLIC_DOMAIN}` : "",
+    ].filter(Boolean),
     plugins: [
         magicLink({
             sendMagicLink: async ({ email, url }, ctx) => {
