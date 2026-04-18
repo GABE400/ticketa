@@ -39,11 +39,18 @@ export const auth = betterAuth({
             clientSecret: process.env.GOOGLE_CLIENT_SECRET || "build_placeholder",
         },
     },
+    advanced: {
+        trustRemoteAddress: true,
+    },
     secret: process.env.BETTER_AUTH_SECRET,
-    baseURL: (process.env.BETTER_AUTH_URL || "https://technical-bridgette-techdo-b2cd0133.koyeb.app").replace(/\/$/, ""),
+    baseURL: (process.env.BETTER_AUTH_URL || 
+             process.env.NEXT_PUBLIC_SITE_URL || 
+             "https://technical-bridgette-techdo-b2cd0133.koyeb.app").replace(/\/$/, ""),
     trustedOrigins: [
         "https://technical-bridgette-techdo-b2cd0133.koyeb.app",
-    ],
+        process.env.BETTER_AUTH_URL,
+        process.env.NEXT_PUBLIC_SITE_URL
+    ].map(o => o?.replace(/\/$/, "")).filter((origin): origin is string => !!origin),
     plugins: [
         magicLink({
             sendMagicLink: async ({ email, url }, ctx) => {
