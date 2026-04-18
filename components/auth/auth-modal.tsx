@@ -1,6 +1,4 @@
-'use client';
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Shield, Mail, Lock, ArrowRight, Loader2, Wand2, CheckCircle2, User } from 'lucide-react';
 import { authClient } from '@/lib/auth-client';
@@ -30,17 +28,29 @@ interface AuthModalProps {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
   defaultTab?: 'login' | 'signup';
+  defaultRole?: 'buyer' | 'organizer';
 }
 
-export default function AuthModal({ isOpen, onOpenChange, defaultTab = 'login' }: AuthModalProps) {
+export default function AuthModal({ 
+  isOpen, 
+  onOpenChange, 
+  defaultTab = 'login',
+  defaultRole = 'buyer'
+}: AuthModalProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const [role, setRole] = useState<'buyer' | 'organizer'>('buyer');
+  const [role, setRole] = useState<'buyer' | 'organizer'>(defaultRole);
   const [isLoading, setIsLoading] = useState(false);
   const [isMagicLinkSent, setIsMagicLinkSent] = useState(false);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    if (isOpen) {
+      setRole(defaultRole);
+    }
+  }, [isOpen, defaultRole]);
 
   const handleSocialLogin = async (provider: 'google' | 'github') => {
     setIsLoading(true);

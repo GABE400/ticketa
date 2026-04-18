@@ -7,7 +7,7 @@ import { Menu, X, LogOut, Ticket, LayoutDashboard, User, Loader2, ShieldCheck } 
 import Link from 'next/link';
 import { authClient } from '@/lib/auth-client';
 import { useRouter } from 'next/navigation';
-import { useAuthModal } from './auth/auth-modal-provider';
+import { useAuthModal } from '@/components/auth/auth-modal-provider';
 import { becomeOrganizerAction } from '@/lib/actions/users';
 import { toast } from 'sonner';
 

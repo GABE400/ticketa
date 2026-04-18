@@ -137,6 +137,12 @@ export const orders = pgTable("orders", {
 	createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
+export const siteSettings = pgTable("site_settings", {
+	id: text("id").primaryKey().default("global"),
+	demoVideoUrl: text("demo_video_url"),
+	updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
 // --- Relations ---
 
 export const userRelations = relations(user, ({ many }) => ({

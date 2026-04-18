@@ -1,11 +1,38 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles } from 'lucide-react';
-import { useAuthModal } from './auth/auth-modal-provider';
+import { ArrowRight, Sparkles, Wand2 } from 'lucide-react';
+import { useAuthModal } from '@/components/auth/auth-modal-provider';
+import { useRouter } from 'next/navigation';
+import { authClient } from '@/lib/auth-client';
+import { useState } from 'react';
+import { DemoModal } from './events/demo-modal';
+import { toast } from 'sonner';
 
-export default function HeroSection() {
+export default function HeroSection({ demoVideoUrl }: { demoVideoUrl?: string | null }) {
   const { openSignup } = useAuthModal();
+  const router = useRouter();
+  const { data: session } = authClient.useSession();
+  const [isDemoOpen, setIsDemoOpen] = useState(false);
+
+  const handleStartSelling = () => {
+    if (session) {
+      router.push('/dashboard');
+    } else {
+      openSignup('organizer');
+    }
+  };
+
+  const handleWatchDemo = () => {
+    if (!demoVideoUrl) {
+      toast.info("No Demo Video available at the moment", {
+        description: "The administrator hasn't added a demo video yet. Check back soon!",
+        icon: <Wand2 className="w-4 h-4 text-purple-400" />
+      });
+      return;
+    }
+    setIsDemoOpen(true);
+  };
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -94,6 +121,7 @@ export default function HeroSection() {
         {/* CTA Buttons */}
         <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 justify-center">
           <motion.button
+            onClick={handleStartSelling}
             className="px-8 py-4 rounded-xl bg-gradient-to-r from-purple-500 to-red-500 text-white font-bold text-lg hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 flex items-center justify-center gap-2 group"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -103,6 +131,7 @@ export default function HeroSection() {
           </motion.button>
           
           <motion.button
+            onClick={handleWatchDemo}
             className="px-8 py-4 rounded-xl border border-purple-500/40 hover:border-purple-500/80 hover:bg-purple-500/10 text-white font-bold text-lg transition-all duration-300 backdrop-blur-sm"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -123,6 +152,12 @@ export default function HeroSection() {
           </div>
         </motion.div>
       </motion.div>
+
+      <DemoModal 
+        isOpen={isDemoOpen} 
+        onOpenChange={setIsDemoOpen} 
+        videoUrl={demoVideoUrl || null} 
+      />
     </section>
   );
 }

@@ -5,7 +5,7 @@ import AuthModal from '@/components/auth/auth-modal';
 
 interface AuthModalContextType {
   openLogin: () => void;
-  openSignup: () => void;
+  openSignup: (role?: 'buyer' | 'organizer') => void;
   close: () => void;
 }
 
@@ -14,14 +14,16 @@ const AuthModalContext = createContext<AuthModalContextType | undefined>(undefin
 export function AuthModalProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [tab, setTab] = useState<'login' | 'signup'>('login');
+  const [selectedRole, setSelectedRole] = useState<'buyer' | 'organizer'>('buyer');
 
   const openLogin = () => {
     setTab('login');
     setIsOpen(true);
   };
 
-  const openSignup = () => {
+  const openSignup = (role?: 'buyer' | 'organizer') => {
     setTab('signup');
+    if (role) setSelectedRole(role);
     setIsOpen(true);
   };
 
@@ -34,6 +36,7 @@ export function AuthModalProvider({ children }: { children: ReactNode }) {
         isOpen={isOpen} 
         onOpenChange={setIsOpen} 
         defaultTab={tab} 
+        defaultRole={selectedRole}
       />
     </AuthModalContext.Provider>
   );
