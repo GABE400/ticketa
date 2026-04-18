@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { 
-  Globe, DollarSign, CheckCircle2, Flag, ArrowRight,
+  Globe, CreditCard, CheckCircle2, Flag, ArrowRight,
   Eye, EyeOff, Camera, X, ImagePlus, MapPin, Sparkles
 } from 'lucide-react';
 import MarkdownPreview from './markdown-preview';
@@ -52,7 +52,7 @@ type EventFormValues = z.infer<typeof eventSchema>;
 const STEPS = [
   { id: 'identity', title: 'Identity', icon: <Sparkles className="w-5 h-5" /> },
   { id: 'logistics', title: 'Time & Place', icon: <MapPin className="w-5 h-5" /> },
-  { id: 'tickets', title: 'Tickets', icon: <DollarSign className="w-5 h-5" /> },
+  { id: 'tickets', title: 'Tickets', icon: <CreditCard className="w-5 h-5" /> },
   { id: 'review', title: 'Review', icon: <Flag className="w-5 h-5" /> },
 ];
 
@@ -544,7 +544,7 @@ export default function CreateEventForm({ eventId, initialData, onSuccess }: Cre
                            {minPrice === 0 ? 'Access' : 'Starts at'}
                          </span>
                          <span className="text-3xl font-black text-white tracking-tighter">
-                           {minPrice === 0 ? 'Free' : `$${minPrice.toLocaleString()}`}
+                           {minPrice === 0 ? 'Free' : `K${minPrice.toLocaleString()}`}
                          </span>
                       </div>
                       <Button disabled className="bg-white text-black h-14 px-12 rounded-2xl font-black uppercase text-[10px] tracking-widest shadow-xl ml-4">
